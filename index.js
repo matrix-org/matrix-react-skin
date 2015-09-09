@@ -18,11 +18,11 @@ limitations under the License.
 
 var React = require("react");
 // In normal usage of the module:
-//var MatrixReactSdk = require("matrix-react-sdk");
+var MatrixReactSdk = require("matrix-react-sdk");
 // Or to import the source directly from the file system:
 // (This is useful for debugging the SDK as it seems source
 // maps cannot pass through two stages).
-var MatrixReactSdk = require("../../src/index");
+//var MatrixReactSdk = require("../../src/index");
 
 // Here, we do some crude URL analysis to allow
 // deep-linking. We only support registration
