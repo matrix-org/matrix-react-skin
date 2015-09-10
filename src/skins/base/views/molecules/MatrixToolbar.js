@@ -18,12 +18,12 @@ limitations under the License.
 
 var React = require('react');
 
-var ComponentBroker = require('../../../../src/ComponentBroker');
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 
 var LogoutButton = ComponentBroker.get("atoms/LogoutButton");
 var EnableNotificationsButton = ComponentBroker.get("atoms/EnableNotificationsButton");
 
-var MatrixToolbarController = require("../../../../src/controllers/molecules/MatrixToolbar");
+var MatrixToolbarController = require('matrix-react-sdk/lib/controllers/molecules/MatrixToolbar');
 
 module.exports = React.createClass({
     displayName: 'MatrixToolbar',

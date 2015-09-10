@@ -16,11 +16,11 @@ limitations under the License.
 
 'use strict';
 
-var NotifierController = require("../../../../src/controllers/organisms/Notifier");
+var NotifierController = require('matrix-react-sdk/lib/controllers/organisms/Notifier');
 
-var MatrixClientPeg = require("../../../../src/MatrixClientPeg");
-var extend = require("../../../../src/extend");
-var dis = require("../../../../src/dispatcher");
+var MatrixClientPeg = require('matrix-react-sdk/lib/MatrixClientPeg');
+var extend = require('matrix-react-sdk/lib/extend');
+var dis = require('matrix-react-sdk/lib/dispatcher');
 
 
 var NotifierView = {

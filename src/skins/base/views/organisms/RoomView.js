@@ -18,9 +18,9 @@ limitations under the License.
 
 var React = require('react');
 
-var MatrixClientPeg = require("../../../../src/MatrixClientPeg");
+var MatrixClientPeg = require('matrix-react-sdk/lib/MatrixClientPeg');
 
-var ComponentBroker = require('../../../../src/ComponentBroker');
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 var classNames = require("classnames");
 
 var MessageTile = ComponentBroker.get('molecules/MessageTile');
@@ -28,7 +28,7 @@ var RoomHeader = ComponentBroker.get('molecules/RoomHeader');
 var MemberList = ComponentBroker.get('organisms/MemberList');
 var MessageComposer = ComponentBroker.get('molecules/MessageComposer');
 
-var RoomViewController = require("../../../../src/controllers/organisms/RoomView");
+var RoomViewController = require('matrix-react-sdk/lib/controllers/organisms/RoomView');
 
 var Loader = require("react-loader");
 

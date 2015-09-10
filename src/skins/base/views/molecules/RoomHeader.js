@@ -18,7 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var RoomHeaderController = require("../../../../src/controllers/molecules/RoomHeader");
+var RoomHeaderController = require('matrix-react-sdk/lib/controllers/molecules/RoomHeader');
 
 module.exports = React.createClass({
     displayName: 'RoomHeader',

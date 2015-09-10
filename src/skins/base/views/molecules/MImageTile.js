@@ -18,9 +18,9 @@ limitations under the License.
 
 var React = require('react');
 
-var MImageTileController = require("../../../../src/controllers/molecules/MImageTile");
+var MImageTileController = require('matrix-react-sdk/lib/controllers/molecules/MImageTile');
 
-var MatrixClientPeg = require('../../../../src/MatrixClientPeg');
+var MatrixClientPeg = require('matrix-react-sdk/lib/MatrixClientPeg');
 
 module.exports = React.createClass({
     displayName: 'MImageTile',

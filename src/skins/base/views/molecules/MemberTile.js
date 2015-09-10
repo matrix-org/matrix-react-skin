@@ -18,7 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var MemberTileController = require("../../../../src/controllers/molecules/MemberTile");
+var MemberTileController = require('matrix-react-sdk/lib/controllers/molecules/MemberTile');
 
 module.exports = React.createClass({
     displayName: 'MemberTile',

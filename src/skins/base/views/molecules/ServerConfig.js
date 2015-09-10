@@ -18,7 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var ServerConfigController = require("../../../../src/controllers/molecules/ServerConfig");
+var ServerConfigController = require('matrix-react-sdk/lib/controllers/molecules/ServerConfig');
 
 module.exports = React.createClass({
     displayName: 'ServerConfig',

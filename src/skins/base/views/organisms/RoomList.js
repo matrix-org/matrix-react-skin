@@ -18,7 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var RoomListController = require("../../../../src/controllers/organisms/RoomList");
+var RoomListController = require('matrix-react-sdk/lib/controllers/organisms/RoomList');
 
 
 module.exports = React.createClass({

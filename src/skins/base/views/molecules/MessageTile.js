@@ -20,7 +20,7 @@ var React = require('react');
 
 var classNames = require("classnames");
 
-var ComponentBroker = require('../../../../src/ComponentBroker');
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 
 var MessageTimestamp = ComponentBroker.get('atoms/MessageTimestamp');
 var SenderProfile = ComponentBroker.get('molecules/SenderProfile');
@@ -35,7 +35,7 @@ var tileTypes = {
     'm.file': ComponentBroker.get('molecules/MFileTile')
 };
 
-var MessageTileController = require("../../../../src/controllers/molecules/MessageTile");
+var MessageTileController = require('matrix-react-sdk/lib/controllers/molecules/MessageTile');
 
 module.exports = React.createClass({
     displayName: 'MessageTile',

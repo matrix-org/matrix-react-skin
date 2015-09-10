@@ -18,9 +18,9 @@ limitations under the License.
 
 var React = require('react');
 
-var MemberListController = require("../../../../src/controllers/organisms/MemberList");
+var MemberListController = require('matrix-react-sdk/lib/controllers/organisms/MemberList');
 
-var ComponentBroker = require('../../../../src/ComponentBroker');
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 
 var MemberTile = ComponentBroker.get("molecules/MemberTile");
 

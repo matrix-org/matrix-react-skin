@@ -18,7 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var MessageComposerController = require("../../../../src/controllers/molecules/MessageComposer");
+var MessageComposerController = require('matrix-react-sdk/lib/controllers/molecules/MessageComposer');
 
 module.exports = React.createClass({
     displayName: 'MessageComposer',

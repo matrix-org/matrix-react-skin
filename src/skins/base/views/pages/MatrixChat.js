@@ -17,7 +17,7 @@ limitations under the License.
 'use strict';
 
 var React = require('react');
-var ComponentBroker = require('../../../../src/ComponentBroker');
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 
 var RoomList = ComponentBroker.get('organisms/RoomList');
 var RoomView = ComponentBroker.get('organisms/RoomView');
@@ -25,7 +25,7 @@ var MatrixToolbar = ComponentBroker.get('molecules/MatrixToolbar');
 var Login = ComponentBroker.get('templates/Login');
 var Register = ComponentBroker.get('templates/Register');
 
-var MatrixChatController = require("../../../../src/controllers/pages/MatrixChat");
+var MatrixChatController = require('matrix-react-sdk/lib/controllers/pages/MatrixChat');
 
 // should be atomised
 var Loader = require("react-loader");

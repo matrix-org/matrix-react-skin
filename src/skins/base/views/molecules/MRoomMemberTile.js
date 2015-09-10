@@ -18,9 +18,9 @@ limitations under the License.
 
 var React = require('react');
 
-var MRoomMemberTileController = require("../../../../src/controllers/molecules/MRoomMemberTile");
+var MRoomMemberTileController = require('matrix-react-sdk/lib/controllers/molecules/MRoomMemberTile');
 
-var ComponentBroker = require('../../../../src/ComponentBroker');
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 var MessageTimestamp = ComponentBroker.get('atoms/MessageTimestamp');
 
 module.exports = React.createClass({

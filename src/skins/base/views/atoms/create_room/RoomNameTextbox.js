@@ -18,7 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var RoomNameTextboxController = require("../../../../../src/controllers/atoms/create_room/RoomNameTextbox");
+var RoomNameTextboxController = require('matrix-react-sdk/lib/controllers/atoms/create_room/RoomNameTextbox');
 
 module.exports = React.createClass({
     displayName: 'RoomNameTextbox',

@@ -18,7 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var SenderProfileController = require("../../../../src/controllers/molecules/SenderProfile");
+var SenderProfileController = require('matrix-react-sdk/lib/controllers/molecules/SenderProfile');
 
 module.exports = React.createClass({
     displayName: 'SenderProfile',

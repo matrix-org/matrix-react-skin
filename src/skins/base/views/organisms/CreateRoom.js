@@ -18,9 +18,9 @@ limitations under the License.
 
 var React = require('react');
 
-var CreateRoomController = require("../../../../src/controllers/organisms/CreateRoom");
+var CreateRoomController = require('matrix-react-sdk/lib/controllers/organisms/CreateRoom');
 
-var ComponentBroker = require('../../../../src/ComponentBroker');
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 
 var CreateRoomButton = ComponentBroker.get("atoms/create_room/CreateRoomButton");
 var RoomNameTextbox = ComponentBroker.get("atoms/create_room/RoomNameTextbox");

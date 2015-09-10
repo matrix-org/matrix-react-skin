@@ -18,11 +18,11 @@ limitations under the License.
 
 var React = require('react');
 
-var ComponentBroker = require("../../../../src/ComponentBroker");
+var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
 
 var Loader = require("react-loader");
 
-var RegisterController = require("../../../../src/controllers/templates/Register");
+var RegisterController = require('matrix-react-sdk/lib/controllers/templates/Register');
 
 var ServerConfig = ComponentBroker.get("molecules/ServerConfig");
 
