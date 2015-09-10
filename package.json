@@ -12,7 +12,6 @@
     "browserify": "^10.2.3",
     "envify": "^3.4.0",
     "http-server": "^0.8.0",
-    "matrix-react-sdk": "../matrix-react-sdk",
     "reactify": "^1.1.1",
     "uglify-js": "^2.4.23",
     "watchify": "^3.2.1"
@@ -20,5 +19,9 @@
   "scripts": {
     "build": "browserify --ignore olm -t [ envify --NODE_ENV production ] -t reactify index.js | uglifyjs -c -m -o bundle.js",
     "start": "parallelshell 'watchify --ignore olm -v -d -t reactify index.js -o bundle.js' 'http-server'"
+  },
+  "dependencies": {
+    "matrix-react-sdk": "../matrix-react-sdk",
+    "react": "^0.13.3"
   }
 }
