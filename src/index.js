@@ -16,6 +16,8 @@ limitations under the License.
 
 'use strict';
 
+require('./skins/base/skindex');
+
 var React = require("react");
 // In normal usage of the module:
 var MatrixReactSdk = require("matrix-react-sdk");

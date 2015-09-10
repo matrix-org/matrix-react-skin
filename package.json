@@ -17,7 +17,7 @@
     "watchify": "^3.2.1"
   },
   "scripts": {
-    "build": "browserify --ignore olm -t [ envify --NODE_ENV production ] -t reactify index.js | uglifyjs -c -m -o bundle.js",
+    "build": "browserify --ignore olm -t [ envify --NODE_ENV production ] -t reactify src/index.js | uglifyjs -c -m -o bundle.js",
     "start": "parallelshell 'watchify --ignore olm -v -d -t reactify index.js -o bundle.js' 'http-server'"
   },
   "dependencies": {
