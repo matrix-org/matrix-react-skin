@@ -18,14 +18,11 @@ limitations under the License.
 
 var React = require('react');
 
-var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
+var sdk = require('matrix-react-sdk');
 
-var ProgressBar = ComponentBroker.get("molecules/ProgressBar");
 var Loader = require("react-loader");
 
 var LoginController = require('matrix-react-sdk/lib/controllers/templates/Login');
-
-var ServerConfig = ComponentBroker.get("molecules/ServerConfig");
 
 module.exports = React.createClass({
     displayName: 'Login',
@@ -50,6 +47,8 @@ module.exports = React.createClass({
     },
 
     componentForStep: function(step) {
+        var ServerConfig = sdk.getComponent('molecules.ServerConfig');
+
         switch (step) {
             case 'choose_hs':
                 return (
@@ -92,6 +91,8 @@ module.exports = React.createClass({
     },
 
     render: function() {
+        var ProgressBar = sdk.getComponent('molecules.ProgressBar');
+
         return (
             <div className="mx_Login">
             <ProgressBar value={this.state.currentStep} max={this.state.totalSteps} />

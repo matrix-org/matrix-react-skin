@@ -20,16 +20,14 @@ var React = require('react');
 
 var MemberListController = require('matrix-react-sdk/lib/controllers/organisms/MemberList');
 
-var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
-
-var MemberTile = ComponentBroker.get("molecules/MemberTile");
-
+var sdk = require('matrix-react-sdk');
 
 module.exports = React.createClass({
     displayName: 'MemberList',
     mixins: [MemberListController],
 
     makeMemberTiles: function() {
+        var MemberTile = sdk.getComponent('molecules.MemberTile');
         var that = this;
         return Object.keys(that.state.memberDict).map(function(userId) {
             var m = that.state.memberDict[userId];

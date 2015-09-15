@@ -17,13 +17,7 @@ limitations under the License.
 'use strict';
 
 var React = require('react');
-var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
-
-var RoomList = ComponentBroker.get('organisms/RoomList');
-var RoomView = ComponentBroker.get('organisms/RoomView');
-var MatrixToolbar = ComponentBroker.get('molecules/MatrixToolbar');
-var Login = ComponentBroker.get('templates/Login');
-var Register = ComponentBroker.get('templates/Register');
+var sdk = require('matrix-react-sdk');
 
 var MatrixChatController = require('matrix-react-sdk/lib/controllers/pages/MatrixChat');
 
@@ -36,6 +30,12 @@ module.exports = React.createClass({
     mixins: [MatrixChatController],
 
     render: function() {
+        var RoomList = sdk.getComponent('organisms.RoomList');
+        var RoomView = sdk.getComponent('organisms.RoomView');
+        var MatrixToolbar = sdk.getComponent('molecules.MatrixToolbar');
+        var Login = sdk.getComponent('templates.Login');
+        var Register = sdk.getComponent('templates.Register');
+
         if (this.state.logged_in && this.state.ready) {
             return (
                 <div className="mx_MatrixChat">

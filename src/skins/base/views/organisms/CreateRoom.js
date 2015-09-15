@@ -20,13 +20,7 @@ var React = require('react');
 
 var CreateRoomController = require('matrix-react-sdk/lib/controllers/organisms/CreateRoom');
 
-var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
-
-var CreateRoomButton = ComponentBroker.get("atoms/create_room/CreateRoomButton");
-var RoomNameTextbox = ComponentBroker.get("atoms/create_room/RoomNameTextbox");
-var Presets = ComponentBroker.get("atoms/create_room/Presets");
-var UserSelector = ComponentBroker.get("molecules/UserSelector");
-
+var sdk = require('matrix-react-sdk');
 
 module.exports = React.createClass({
     displayName: 'CreateRoom',
@@ -45,6 +39,11 @@ module.exports = React.createClass({
     },
 
     render: function() {
+        var CreateRoomButton = sdk.getComponent('atoms.create_room.CreateRoomButton');
+        var RoomNameTextbox = sdk.getComponent('atoms.create_room.RoomNameTextbox');
+        var Presets = sdk.getComponent('atoms.create_room.Presets');
+        var UserSelector = sdk.getComponent('molecules.UserSelector');
+
         var curr_phase = this.state.phase;
         if (curr_phase == this.phases.CREATING) {
             return (

@@ -18,8 +18,8 @@ limitations under the License.
 
 var React = require('react');
 
-require('./skins/base/skindex');
 var sdk = require('matrix-react-sdk');
+sdk.loadSkin(require('./skins/base/skindex'));
 
 // Here, we do some crude URL analysis to allow
 // deep-linking. We only support registration
@@ -66,7 +66,9 @@ var makeRegistrationUrl = function() {
            '#/register';
 }
 
+var MatrixChat = sdk.getComponent('pages.MatrixChat');
+
 window.matrixChat = React.render(
-    <sdk.pages.MatrixChat onNewScreen={onNewScreen} registrationUrl={makeRegistrationUrl()} />,
+    <MatrixChat onNewScreen={onNewScreen} registrationUrl={makeRegistrationUrl()} />,
     document.getElementById('matrixchat')
 );

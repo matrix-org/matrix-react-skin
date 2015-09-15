@@ -20,8 +20,7 @@ var React = require('react');
 
 var MRoomMemberTileController = require('matrix-react-sdk/lib/controllers/molecules/MRoomMemberTile');
 
-var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
-var MessageTimestamp = ComponentBroker.get('atoms/MessageTimestamp');
+var sdk = require('matrix-react-sdk');
 
 module.exports = React.createClass({
     displayName: 'MRoomMemberTile',
@@ -42,6 +41,7 @@ module.exports = React.createClass({
     },
 
     render: function() {
+        var MessageTimestamp = sdk.getComponent('atoms.MessageTimestamp');
         // XXX: for now, just cheekily borrow the css from message tile...
         return (
             <div className="mx_MessageTile">

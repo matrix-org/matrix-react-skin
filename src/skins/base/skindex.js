@@ -21,38 +21,46 @@ limitations under the License.
  * You are not a salmon.
  */
 
-var sdk = require('matrix-react-sdk');
+var skin = {
+    atoms: {},
+    molecules: {},
+    organisms: {},
+    templates: {},
+    pages: {}
+};
 
-sdk.atoms.EditableText = require('./views/atoms/EditableText');
-sdk.atoms.EnableNotificationsButton = require('./views/atoms/EnableNotificationsButton');
-sdk.atoms.LogoutButton = require('./views/atoms/LogoutButton');
-sdk.atoms.MessageTimestamp = require('./views/atoms/MessageTimestamp');
-sdk.atoms.create_room = {};
-sdk.atoms.create_room.CreateRoomButton = require('./views/atoms/create_room/CreateRoomButton');
-sdk.atoms.create_room.Presets = require('./views/atoms/create_room/Presets');
-sdk.atoms.create_room.RoomNameTextbox = require('./views/atoms/create_room/RoomNameTextbox');
-sdk.molecules.MEmoteTile = require('./views/molecules/MEmoteTile');
-sdk.molecules.MFileTile = require('./views/molecules/MFileTile');
-sdk.molecules.MImageTile = require('./views/molecules/MImageTile');
-sdk.molecules.MNoticeTile = require('./views/molecules/MNoticeTile');
-sdk.molecules.MRoomMemberTile = require('./views/molecules/MRoomMemberTile');
-sdk.molecules.MTextTile = require('./views/molecules/MTextTile');
-sdk.molecules.MatrixToolbar = require('./views/molecules/MatrixToolbar');
-sdk.molecules.MemberTile = require('./views/molecules/MemberTile');
-sdk.molecules.MessageComposer = require('./views/molecules/MessageComposer');
-sdk.molecules.MessageTile = require('./views/molecules/MessageTile');
-sdk.molecules.ProgressBar = require('./views/molecules/ProgressBar');
-sdk.molecules.RoomHeader = require('./views/molecules/RoomHeader');
-sdk.molecules.RoomTile = require('./views/molecules/RoomTile');
-sdk.molecules.SenderProfile = require('./views/molecules/SenderProfile');
-sdk.molecules.ServerConfig = require('./views/molecules/ServerConfig');
-sdk.molecules.UnknownMessageTile = require('./views/molecules/UnknownMessageTile');
-sdk.molecules.UserSelector = require('./views/molecules/UserSelector');
-sdk.organisms.CreateRoom = require('./views/organisms/CreateRoom');
-sdk.organisms.MemberList = require('./views/organisms/MemberList');
-sdk.organisms.Notifier = require('./views/organisms/Notifier');
-sdk.organisms.RoomList = require('./views/organisms/RoomList');
-sdk.organisms.RoomView = require('./views/organisms/RoomView');
-sdk.pages.MatrixChat = require('./views/pages/MatrixChat');
-sdk.templates.Login = require('./views/templates/Login');
-sdk.templates.Register = require('./views/templates/Register');
+skin.atoms.EditableText = require('./views/atoms/EditableText');
+skin.atoms.EnableNotificationsButton = require('./views/atoms/EnableNotificationsButton');
+skin.atoms.LogoutButton = require('./views/atoms/LogoutButton');
+skin.atoms.MessageTimestamp = require('./views/atoms/MessageTimestamp');
+skin.atoms.create_room = {};
+skin.atoms.create_room.CreateRoomButton = require('./views/atoms/create_room/CreateRoomButton');
+skin.atoms.create_room.Presets = require('./views/atoms/create_room/Presets');
+skin.atoms.create_room.RoomNameTextbox = require('./views/atoms/create_room/RoomNameTextbox');
+skin.molecules.MEmoteTile = require('./views/molecules/MEmoteTile');
+skin.molecules.MFileTile = require('./views/molecules/MFileTile');
+skin.molecules.MImageTile = require('./views/molecules/MImageTile');
+skin.molecules.MNoticeTile = require('./views/molecules/MNoticeTile');
+skin.molecules.MRoomMemberTile = require('./views/molecules/MRoomMemberTile');
+skin.molecules.MTextTile = require('./views/molecules/MTextTile');
+skin.molecules.MatrixToolbar = require('./views/molecules/MatrixToolbar');
+skin.molecules.MemberTile = require('./views/molecules/MemberTile');
+skin.molecules.MessageComposer = require('./views/molecules/MessageComposer');
+skin.molecules.MessageTile = require('./views/molecules/MessageTile');
+skin.molecules.ProgressBar = require('./views/molecules/ProgressBar');
+skin.molecules.RoomHeader = require('./views/molecules/RoomHeader');
+skin.molecules.RoomTile = require('./views/molecules/RoomTile');
+skin.molecules.SenderProfile = require('./views/molecules/SenderProfile');
+skin.molecules.ServerConfig = require('./views/molecules/ServerConfig');
+skin.molecules.UnknownMessageTile = require('./views/molecules/UnknownMessageTile');
+skin.molecules.UserSelector = require('./views/molecules/UserSelector');
+skin.organisms.CreateRoom = require('./views/organisms/CreateRoom');
+skin.organisms.MemberList = require('./views/organisms/MemberList');
+skin.organisms.Notifier = require('./views/organisms/Notifier');
+skin.organisms.RoomList = require('./views/organisms/RoomList');
+skin.organisms.RoomView = require('./views/organisms/RoomView');
+skin.pages.MatrixChat = require('./views/pages/MatrixChat');
+skin.templates.Login = require('./views/templates/Login');
+skin.templates.Register = require('./views/templates/Register');
+
+module.exports = skin;

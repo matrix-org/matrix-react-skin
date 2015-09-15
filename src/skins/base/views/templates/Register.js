@@ -18,13 +18,11 @@ limitations under the License.
 
 var React = require('react');
 
-var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
+var sdk = require('matrix-react-sdk');
 
 var Loader = require("react-loader");
 
 var RegisterController = require('matrix-react-sdk/lib/controllers/templates/Register');
-
-var ServerConfig = ComponentBroker.get("molecules/ServerConfig");
 
 module.exports = React.createClass({
     displayName: 'Register',
@@ -48,6 +46,8 @@ module.exports = React.createClass({
     },
 
     componentForStep: function(step) {
+        var ServerConfig = sdk.getComponent('molecules.ServerConfig');
+
         switch (step) {
             case 'initial':
                 return (

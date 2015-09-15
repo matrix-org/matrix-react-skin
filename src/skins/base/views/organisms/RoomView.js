@@ -20,14 +20,8 @@ var React = require('react');
 
 var MatrixClientPeg = require('matrix-react-sdk/lib/MatrixClientPeg');
 
-var ComponentBroker = require('matrix-react-sdk/lib/ComponentBroker');
+var sdk = require('matrix-react-sdk');
 var classNames = require("classnames");
-
-var MessageTile = ComponentBroker.get('molecules/MessageTile');
-var RoomHeader = ComponentBroker.get('molecules/RoomHeader');
-var MemberList = ComponentBroker.get('organisms/MemberList');
-var MessageComposer = ComponentBroker.get('molecules/MessageComposer');
-
 var RoomViewController = require('matrix-react-sdk/lib/controllers/organisms/RoomView');
 
 var Loader = require("react-loader");
@@ -38,6 +32,11 @@ module.exports = React.createClass({
     mixins: [RoomViewController],
 
     render: function() {
+        var MessageTile = sdk.getComponent('molecules.MessageTile');
+        var RoomHeader = sdk.getComponent('molecules.RoomHeader');
+        var MemberList = sdk.getComponent('organisms.MemberList');
+        var MessageComposer = sdk.getComponent('molecules.MessageComposer');
+
         if (!this.state.room) {
             return (
                 <div />
