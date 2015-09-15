@@ -9,18 +9,26 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
+    "babel": "^5.8.23",
     "browserify": "^10.2.3",
+    "catw": "^1.0.1",
     "envify": "^3.4.0",
     "http-server": "^0.8.0",
     "parallelshell": "^2.0.0",
     "reactify": "^1.1.1",
     "uglify-js": "^2.4.23",
+    "uglifycss": "0.0.18",
     "watchify": "^3.2.1"
   },
   "scripts": {
     "reskindex": "reskindex base -h src/skins/base/header",
     "build": "browserify --ignore olm -t [ envify --NODE_ENV production ] -t reactify src/index.js | uglifyjs -c -m -o bundle.js",
-    "start": "parallelshell 'watchify --ignore olm -v -d -t reactify src/index.js -o bundle.js' 'http-server'"
+    "start": "parallelshell 'watchify --ignore olm -v -d -t reactify src/index.js -o bundle.js' 'npm run start:skins:css' 'http-server'",
+    "build:skins:js": "babel src/skins -d lib/skins --source-maps",
+    "build:skins:css": "catw 'src/skins/base/css/**/*.css' -o bundle.css -c uglifycss --no-watch",
+    "start:skins:css": "catw 'src/skins/base/css/**/*.css' -o bundle.css",
+    "clean": "rimraf lib",
+    "prepublish": "npm run build:skins"
   },
   "dependencies": {
     "classnames": "^2.1.3",
