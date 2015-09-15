@@ -59,11 +59,11 @@ module.exports = React.createClass({
         if (thumbHeight) imgStyle['height'] = thumbHeight;
 
         return (
-            <li className="mx_MImageTile">
+            <span className="mx_MImageTile">
                 <a href={cli.mxcUrlToHttp(content.url)} target="_blank">
                     <img src={cli.mxcUrlToHttp(content.url, 320, 240)} alt={content.body} style={imgStyle} />
                 </a>
-            </li>
+            </span>
         );
     },
 });

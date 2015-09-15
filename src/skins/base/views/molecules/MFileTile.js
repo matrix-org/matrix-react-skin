@@ -31,11 +31,11 @@ module.exports = React.createClass({
         var cli = MatrixClientPeg.get();
 
         return (
-            <li className="mx_MFileTile">
+            <span className="mx_MFileTile">
                 <a href={cli.mxcUrlToHttp(content.url)} target="_blank">
                     {this.presentableTextForFile(content)}
                 </a>
-            </li>
+            </span>
         );
     },
 });
