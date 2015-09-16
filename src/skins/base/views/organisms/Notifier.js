@@ -19,32 +19,15 @@ limitations under the License.
 var NotifierController = require('matrix-react-sdk/lib/controllers/organisms/Notifier');
 
 var MatrixClientPeg = require('matrix-react-sdk/lib/MatrixClientPeg');
+var TextForEvent = require("matrix-react-sdk/lib/TextForEvent");
+var Avatar = require("matrix-react-sdk/lib/Avatar");
 var extend = require('matrix-react-sdk/lib/extend');
 var dis = require('matrix-react-sdk/lib/dispatcher');
 
 
 var NotifierView = {
     notificationMessageForEvent: function(ev) {
-        var senderDisplayName = ev.sender ? ev.sender.name : '';
-        var message = null;
-
-        if (ev.event.type === "m.room.message") {
-            message = ev.getContent().body;
-            if (ev.getContent().msgtype === "m.emote") {
-                message = "* " + senderDisplayName + " " + message;
-            } else if (ev.getContent().msgtype === "m.image") {
-                message = senderDisplayName + " sent an image.";
-            }
-        } else if (ev.event.type == "m.room.member") {
-            if (ev.event.state_key !== MatrixClientPeg.get().credentials.userId  && "join" === ev.getContent().membership) {
-                // Notify when another user joins
-                message = senderDisplayName + " joined";
-            } else if (ev.event.state_key === MatrixClientPeg.get().credentials.userId  && "invite" === ev.getContent().membership) {
-                // notify when you are invited
-                message = senderDisplayName + " invited you to a room";
-            }
-        }
-        return message;
+        return TextForEvent.textForEvent(ev);
     },
 
     displayNotification: function(ev, room) {
@@ -61,15 +44,29 @@ var NotifierView = {
         var title;
         if (!ev.sender ||  room.name == ev.sender.name) {
             title = room.name;
+            // notificationMessageForEvent includes sender,
+            // but we already have the sender here
+            if (ev.getContent().body) msg = ev.getContent().body;
+        } else if (ev.getType() == 'm.room.member') {
+            // context is all in the message here, we don't need
+            // to display sender info
+            title = room.name;
         } else if (ev.sender) {
             title = ev.sender.name + " (" + room.name + ")";
+            // notificationMessageForEvent includes sender,
+            // but we've just out sender in the title
+            if (ev.getContent().body) msg = ev.getContent().body;
         }
+
+        var avatarUrl = Avatar.avatarUrlForMember(
+            ev.sender, 40, 40, 'crop'
+        );
 
         var notification = new global.Notification(
             title,
             {
                 "body": msg,
-                "icon": MatrixClientPeg.get().getAvatarUrlForMember(ev.sender)
+                "icon": avatarUrl
             }
         );
 
