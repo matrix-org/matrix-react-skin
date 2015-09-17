@@ -22,9 +22,6 @@ var sdk = require('matrix-react-sdk');
 var MatrixClientPeg = require("matrix-react-sdk/lib/MatrixClientPeg");
 var Modal = require("matrix-react-sdk/lib/Modal");
 var MemberTileController = require("matrix-react-sdk/lib/controllers/molecules/MemberTile");
-var MemberInfo = sdk.getComponent('molecules.MemberInfo');
-var ErrorDialog = sdk.getComponent("organisms.ErrorDialog");
-var MemberAvatar = sdk.getComponent('atoms.MemberAvatar');
 
 // The Lato WOFF doesn't include sensible combining diacritics, so Chrome chokes on rendering them.
 // Revert to Arial when this happens, which on OSX works at least.
@@ -35,6 +32,10 @@ module.exports = React.createClass({
     mixins: [MemberTileController],
 
     render: function() {
+        var MemberInfo = sdk.getComponent('molecules.MemberInfo');
+        var ErrorDialog = sdk.getComponent("organisms.ErrorDialog");
+        var MemberAvatar = sdk.getComponent('atoms.MemberAvatar');
+
         var isMyUser = MatrixClientPeg.get().credentials.userId == this.props.member.userId;
 
         var presenceClass = "mx_MemberTile_offline";

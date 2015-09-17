@@ -22,7 +22,10 @@ var MatrixClientPeg = require('matrix-react-sdk/lib/MatrixClientPeg');
 
 var sdk = require('matrix-react-sdk');
 var classNames = require("classnames");
-var RoomViewController = require('matrix-react-sdk/lib/controllers/organisms/RoomView');
+var filesize = require('filesize');
+var q = require('q');
+
+var RoomViewController = require("matrix-react-sdk/lib/controllers/organisms/RoomView");
 
 var Loader = require("react-loader");
 
@@ -31,16 +34,67 @@ module.exports = React.createClass({
     displayName: 'RoomView',
     mixins: [RoomViewController],
 
+    onSettingsClick: function() {
+        this.setState({editingRoomSettings: true});
+    },
+
+    onSaveClick: function() {
+        this.setState({
+            editingRoomSettings: false,
+            uploadingRoomSettings: true,
+        });
+
+        var new_name = this.refs.header.getRoomName();
+        var new_topic = this.refs.room_settings.getTopic();
+        var new_join_rule = this.refs.room_settings.getJoinRules();
+        var new_history_visibility = this.refs.room_settings.getHistoryVisibility();
+        var new_power_levels = this.refs.room_settings.getPowerLevels();
+
+        this.uploadNewState(
+            new_name,
+            new_topic,
+            new_join_rule,
+            new_history_visibility,
+            new_power_levels
+        );
+    },
+
+    onCancelClick: function() {
+        this.setState(this.getInitialState());
+    },
+
+    getUnreadMessagesString: function() {
+        if (!this.state.numUnreadMessages) {
+            return "";
+        }
+        return this.state.numUnreadMessages + " new messages";
+    },
+
+    scrollToBottom: function() {
+        if (!this.refs.messageWrapper) return;
+        var messageWrapper = this.refs.messageWrapper.getDOMNode();
+        messageWrapper.scrollTop = messageWrapper.scrollHeight;
+    },
+
     render: function() {
         var MessageTile = sdk.getComponent('molecules.MessageTile');
         var RoomHeader = sdk.getComponent('molecules.RoomHeader');
-        var MemberList = sdk.getComponent('organisms.MemberList');
         var MessageComposer = sdk.getComponent('molecules.MessageComposer');
+        var CallView = sdk.getComponent("molecules.voip.CallView");
+        var RoomSettings = sdk.getComponent("molecules.RoomSettings");
 
         if (!this.state.room) {
-            return (
-                <div />
-            );
+            if (this.props.roomId) {
+                return (
+                    <div>
+                    <button onClick={this.onJoinButtonClicked}>Join Room</button>
+                    </div>
+                );
+            } else {
+                return (
+                    <div />
+                );
+            }
         }
 
         var myUserId = MatrixClientPeg.get().credentials.userId;
@@ -57,8 +111,10 @@ module.exports = React.createClass({
                 var joinErrorText = this.state.joinError ? "Failed to join room!" : "";
                 return (
                     <div className="mx_RoomView">
+                        <RoomHeader ref="header" room={this.state.room} simpleHeader="Room invite"/>
                         <div className="mx_RoomView_invitePrompt">
                             <div>{inviteEvent.user_id} has invited you to a room</div>
+                            <br/>
                             <button ref="joinButton" onClick={this.onJoinButtonClicked}>Join</button>
                             <div className="error">{joinErrorText}</div>
                         </div>
@@ -70,29 +126,93 @@ module.exports = React.createClass({
                 mx_RoomView_scrollheader: true,
                 loading: this.state.paginating
             });
+
+            var statusBar = (
+                <div />
+            );
+
+            if (this.state.upload) {
+                var innerProgressStyle = {
+                    width: ((this.state.upload.uploadedBytes / this.state.upload.totalBytes) * 100) + '%'
+                };
+                statusBar = (
+                    <div className="mx_RoomView_uploadBar">
+                        <span className="mx_RoomView_uploadFilename">Uploading {this.state.upload.fileName}</span>
+                        <span className="mx_RoomView_uploadBytes">
+                        {filesize(this.state.upload.uploadedBytes)} / {filesize(this.state.upload.totalBytes)}
+                        </span>
+                        <div className="mx_RoomView_uploadProgressOuter">
+                            <div className="mx_RoomView_uploadProgressInner" style={innerProgressStyle}></div>
+                        </div>
+                    </div>
+                );
+            } else {
+                var typingString = this.getWhoIsTypingString();
+                var unreadMsgs = this.getUnreadMessagesString();
+                // unread count trumps who is typing since the unread count is only
+                // set when you've scrolled up
+                if (unreadMsgs) {
+                    statusBar = (
+                        <div className="mx_RoomView_unreadMessagesBar" onClick={ this.scrollToBottom }>
+                            <img src="img/newmessages.png" width="10" height="12" alt=""/>
+                            {unreadMsgs}
+                        </div>
+                    );
+                }
+                else if (typingString) {
+                    statusBar = (
+                        <div className="mx_RoomView_typingBar">
+                            <img src="img/typing.png" width="40" height="40" alt=""/>
+                            {typingString}
+                        </div>
+                    );
+                }
+            }
+
+            var roomEdit = null;
+            if (this.state.editingRoomSettings) {
+                roomEdit = <RoomSettings ref="room_settings" onSaveClick={this.onSaveClick} room={this.state.room} />;
+            }
+            if (this.state.uploadingRoomSettings) {
+                roomEdit = <Loader/>;
+            }
+
+            var fileDropTarget = null;
+            if (this.state.draggingFile) {
+                fileDropTarget = <div className="mx_RoomView_fileDropTarget">
+                                    <div className="mx_RoomView_fileDropTargetLabel">
+                                        <img src="img/upload-big.png" width="46" height="61" alt="Drop File Here"/><br/>
+                                        Drop File Here
+                                    </div>
+                                 </div>;
+            }
+
             return (
                 <div className="mx_RoomView">
-                    <RoomHeader room={this.state.room} />
-                    <div className="mx_RoomView_roomWrapper">
-                        <main className="mx_RoomView_messagePanel">
-                            <div ref="messageWrapper" className="mx_RoomView_messageListWrapper" onScroll={this.onMessageListScroll}>
-                                <div className="mx_RoomView_MessageList">
-                                    <div className={scrollheader_classes}>
-                                    </div>
-                                    <ul className="mx_RoomView_MessageList_ul" aria-live="polite">
-                                        {this.getEventTiles()}
-                                    </ul>
-                                </div>
-                            </div>
-                            <MessageComposer roomId={this.props.roomId} />
-                        </main>
-                        <aside>
-                            <MemberList roomId={this.props.roomId} key={this.props.roomId} />
-                        </aside>
+                    <RoomHeader ref="header" room={this.state.room} editing={this.state.editingRoomSettings}
+                        onSettingsClick={this.onSettingsClick} onSaveClick={this.onSaveClick} onCancelClick={this.onCancelClick} />
+                    <div className="mx_RoomView_auxPanel">
+                        <CallView room={this.state.room}/>
+                        { roomEdit }
                     </div>
+                    <div className="mx_RoomView_messagePanel">
+                        <div ref="messageWrapper" className="mx_RoomView_messageListWrapper" onScroll={ this.onMessageListScroll }>
+                            { fileDropTarget }
+                            <ol className="mx_RoomView_MessageList" aria-live="polite">
+                                <li className={scrollheader_classes}>
+                                </li>
+                                {this.getEventTiles()}
+                            </ol>
+                        </div>
+                    </div>
+                    <div className="mx_RoomView_statusArea">
+                        <div className="mx_RoomView_statusAreaBox">
+                            {statusBar}
+                        </div>
+                    </div>
+                    <MessageComposer room={this.state.room} uploadFile={this.uploadFile} />
                 </div>
             );
         }
     },
 });
-
