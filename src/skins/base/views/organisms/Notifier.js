@@ -20,7 +20,6 @@ var NotifierController = require('matrix-react-sdk/lib/controllers/organisms/Not
 
 var MatrixClientPeg = require('matrix-react-sdk/lib/MatrixClientPeg');
 var TextForEvent = require("matrix-react-sdk/lib/TextForEvent");
-var Avatar = require("matrix-react-sdk/lib/Avatar");
 var extend = require('matrix-react-sdk/lib/extend');
 var dis = require('matrix-react-sdk/lib/dispatcher');
 
@@ -58,7 +57,7 @@ var NotifierView = {
             if (ev.getContent().body) msg = ev.getContent().body;
         }
 
-        var avatarUrl = Avatar.avatarUrlForMember(
+        var avatarUrl = MatrixClientPeg.get().getAvatarUrlForMember(
             ev.sender, 40, 40, 'crop'
         );
 
