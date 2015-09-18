@@ -154,7 +154,6 @@ module.exports = React.createClass({
                 if (unreadMsgs) {
                     statusBar = (
                         <div className="mx_RoomView_unreadMessagesBar" onClick={ this.scrollToBottom }>
-                            <img src="img/newmessages.png" width="10" height="12" alt=""/>
                             {unreadMsgs}
                         </div>
                     );
@@ -162,7 +161,6 @@ module.exports = React.createClass({
                 else if (typingString) {
                     statusBar = (
                         <div className="mx_RoomView_typingBar">
-                            <img src="img/typing.png" width="40" height="40" alt=""/>
                             {typingString}
                         </div>
                     );
@@ -181,7 +179,6 @@ module.exports = React.createClass({
             if (this.state.draggingFile) {
                 fileDropTarget = <div className="mx_RoomView_fileDropTarget">
                                     <div className="mx_RoomView_fileDropTargetLabel">
-                                        <img src="img/upload-big.png" width="46" height="61" alt="Drop File Here"/><br/>
                                         Drop File Here
                                     </div>
                                  </div>;
