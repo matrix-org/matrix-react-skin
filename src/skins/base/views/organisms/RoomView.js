@@ -192,8 +192,8 @@ module.exports = React.createClass({
                         <CallView room={this.state.room}/>
                         { roomEdit }
                     </div>
-                    <div className="mx_RoomView_messagePanel">
-                        <div ref="messageWrapper" className="mx_RoomView_messageListWrapper" onScroll={ this.onMessageListScroll }>
+                    <div ref="messageWrapper" className="mx_RoomView_messagePanel" onScroll={ this.onMessageListScroll }>
+                        <div className="mx_RoomView_messageListWrapper">
                             { fileDropTarget }
                             <ol className="mx_RoomView_MessageList" aria-live="polite">
                                 <li className={scrollheader_classes}>

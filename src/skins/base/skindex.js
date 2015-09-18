@@ -34,6 +34,7 @@ skin.atoms.EnableNotificationsButton = require('./views/atoms/EnableNotification
 skin.atoms.LogoutButton = require('./views/atoms/LogoutButton');
 skin.atoms.MemberAvatar = require('./views/atoms/MemberAvatar');
 skin.atoms.MessageTimestamp = require('./views/atoms/MessageTimestamp');
+skin.atoms.RoomAvatar = require('./views/atoms/RoomAvatar');
 skin.atoms.create_room = {};
 skin.atoms.create_room.CreateRoomButton = require('./views/atoms/create_room/CreateRoomButton');
 skin.atoms.create_room.Presets = require('./views/atoms/create_room/Presets');
