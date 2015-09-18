@@ -18,37 +18,36 @@ limitations under the License.
 
 var React = require('react');
 
-var MRoomMemberTileController = require('matrix-react-sdk/lib/controllers/molecules/MRoomMemberTile');
+var MRoomMemberTileController = require("matrix-react-sdk/lib/controllers/molecules/MRoomMemberTile");
 
+var MatrixClientPeg = require("matrix-react-sdk/lib/MatrixClientPeg");
 var sdk = require('matrix-react-sdk');
+var TextForEvent = require('matrix-react-sdk/lib/TextForEvent');
 
 module.exports = React.createClass({
     displayName: 'MRoomMemberTile',
     mixins: [MRoomMemberTileController],
 
     getMemberEventText: function() {
-        var ev = this.props.mxEvent;
-        // XXX: SYJS-16
-        var senderName = ev.sender ? ev.sender.name : "Someone";
-        switch (ev.getContent().membership) {
-            case 'invite':
-                return senderName + " invited " + ev.target.name + ".";
-            case 'join':
-                return senderName + " joined the room.";
-            case 'leave':
-                return senderName + " left the room.";
-        }
+        return TextForEvent.textForEvent(this.props.mxEvent);
     },
 
     render: function() {
         var MessageTimestamp = sdk.getComponent('atoms.MessageTimestamp');
+        var MemberAvatar = sdk.getComponent('atoms.MemberAvatar');
         // XXX: for now, just cheekily borrow the css from message tile...
+        var timestamp = this.props.last ? <MessageTimestamp ts={this.props.mxEvent.getTs()} /> : null;
+        var text = this.getMemberEventText();
+        if (!text) return <div/>;
         return (
-            <div className="mx_MessageTile">
-                <MessageTimestamp ts={this.props.mxEvent.getTs()} />
+            <div className="mx_MessageTile mx_MessageTile_notice">
+                <div className="mx_MessageTile_avatar">
+                    <MemberAvatar member={this.props.mxEvent.sender} />
+                </div>
+                { timestamp }
                 <span className="mx_SenderProfile"></span>
                 <span className="mx_MessageTile_content">
-                    {this.getMemberEventText()}
+                    { text }
                 </span>
             </div>
         );
