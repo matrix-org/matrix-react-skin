@@ -30,7 +30,6 @@ limitations under the License.
 
 .mx_RoomHeader_leftRow {
     height: 48px;
-    margin-top: 18px;
 
     -webkit-box-ordinal-group: 1;
     -moz-box-ordinal-group: 1;
@@ -44,7 +43,6 @@ limitations under the License.
 
 .mx_RoomHeader_textButton {
     height: 48px;
-    margin-top: 18px;
     margin-right: 8px;
     color: #fff;
     line-height: 48px;
