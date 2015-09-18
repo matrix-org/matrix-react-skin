@@ -17,6 +17,7 @@ limitations under the License.
 'use strict';
 
 var React = require('react');
+var classNames = require('classnames');
 
 var MemberListController = require('matrix-react-sdk/lib/controllers/organisms/MemberList');
 
@@ -26,29 +27,79 @@ module.exports = React.createClass({
     displayName: 'MemberList',
     mixins: [MemberListController],
 
+    getInitialState: function() {
+        return { editing: false };
+    },
+
+    // FIXME: combine this more nicely with the MemberInfo positioning stuff...
+    onMemberListScroll: function(ev) {
+        if (this.refs.memberListScroll) {
+            var memberListScroll = this.refs.memberListScroll.getDOMNode();
+            // offset the current MemberInfo bubble
+            var memberInfo = document.getElementsByClassName("mx_MemberInfo")[0];
+            if (memberInfo) {
+                memberInfo.style.top = (memberInfo.parentElement.offsetTop - memberListScroll.scrollTop) + "px";
+            }
+        }
+    },
+
     makeMemberTiles: function() {
-        var MemberTile = sdk.getComponent('molecules.MemberTile');
-        var that = this;
-        return Object.keys(that.state.memberDict).map(function(userId) {
-            var m = that.state.memberDict[userId];
+        var MemberTile = sdk.getComponent("molecules.MemberTile");
+        var self = this;
+        return Object.keys(self.state.memberDict).map(function(userId) {
+            var m = self.state.memberDict[userId];
             return (
-                <li key={userId}>
-                <MemberTile
-                    member={m}
-                />
-                </li>
+                <MemberTile key={userId} member={m} ref={userId} />
             );
         });
+    },
+
+    onPopulateInvite: function(inputText, shouldSubmit) {
+        // reset back to placeholder
+        this.refs.invite.setValue("Invite", false, true);
+        this.setState({ editing: false });
+        if (!shouldSubmit) {
+            return; // enter key wasn't pressed
+        }
+        this.onInvite(inputText);
+    },
+
+    onClickInvite: function(ev) {
+        this.setState({ editing: true });
+        this.refs.invite.onClickDiv();
+        ev.stopPropagation();
+        ev.preventDefault();
+    },
+
+    inviteTile: function() {
+        var EditableText = sdk.getComponent("atoms.EditableText");
+
+        var classes = classNames({
+            mx_MemberTile: true,
+            mx_MemberTile_inviteEditing: this.state.editing,
+        });
+
+        return (
+            <div className={ classes } onClick={ this.onClickInvite } >
+                <div className="mx_MemberTile_avatar"></div>
+                <div className="mx_MemberTile_name">
+                    <EditableText ref="invite" label="Invite" placeHolder="@user:domain.com" initialValue="" onValueChanged={this.onPopulateInvite}/>
+                </div>
+            </div>
+        );
     },
 
     render: function() {
         return (
             <div className="mx_MemberList">
-                <ul>
-                    {this.makeMemberTiles()}
-                </ul>
+                <div className="mx_MemberList_border" ref="memberListScroll" onScroll={ this.onMemberListScroll }>
+                    <h2>Members</h2>
+                    <div className="mx_MemberList_wrapper">
+                        {this.makeMemberTiles()}
+                        {this.inviteTile()}
+                    </div>
+                </div>
             </div>
         );
     }
 });
-

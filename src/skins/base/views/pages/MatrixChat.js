@@ -35,6 +35,7 @@ module.exports = React.createClass({
         var MatrixToolbar = sdk.getComponent('molecules.MatrixToolbar');
         var Login = sdk.getComponent('templates.Login');
         var Register = sdk.getComponent('templates.Register');
+        var MemberList = sdk.getComponent('organisms.MemberList');
 
         if (this.state.logged_in && this.state.ready) {
             return (
@@ -45,6 +46,9 @@ module.exports = React.createClass({
                             <MatrixToolbar />
                         </aside>
                         <RoomView roomId={this.state.currentRoom} key={this.state.currentRoom} />
+                        <aside>
+                            <MemberList roomId={this.state.currentRoom} key={this.state.currentRoom} />
+                        </aside>
                     </div>
                 </div>
             );
