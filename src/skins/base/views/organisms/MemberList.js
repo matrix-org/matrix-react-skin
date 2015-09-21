@@ -93,7 +93,6 @@ module.exports = React.createClass({
         return (
             <div className="mx_MemberList">
                 <div className="mx_MemberList_border" ref="memberListScroll" onScroll={ this.onMemberListScroll }>
-                    <h2>Members</h2>
                     <div className="mx_MemberList_wrapper">
                         {this.makeMemberTiles()}
                         {this.inviteTile()}

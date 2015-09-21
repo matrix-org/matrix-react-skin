@@ -14,7 +14,38 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-.mx_MessageComposer textarea {
-    width: 100%;
+.mx_MessageComposer_wrapper {
+    vertical-align: middle;
     margin: auto;
+}
+
+.mx_MessageComposer_row {
+    display: table-row;
+    width: 100%;
+}
+
+.mx_MessageComposer_input {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.mx_MessageComposer_input textarea {
+    font-size: 15px;
+    width: 98%;
+    height: 1.2em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    resize: none;
+}
+
+/* hack for FF as vertical alignment of custom placeholder text is broken */
+.mx_MessageComposer_input textarea::-moz-placeholder {
+    line-height: 100%;
+}
+
+.mx_MessageComposer_upload {
+    display: table-cell;
+    vertical-align: middle;
+    padding-right: 15px;
 }

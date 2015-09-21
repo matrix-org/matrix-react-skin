@@ -46,7 +46,7 @@ module.exports = React.createClass({
                             <MatrixToolbar />
                         </aside>
                         <RoomView roomId={this.state.currentRoom} key={this.state.currentRoom} />
-                        <aside>
+                        <aside className="mx_MatrixChat_rightPanel">
                             <MemberList roomId={this.state.currentRoom} key={this.state.currentRoom} />
                         </aside>
                     </div>

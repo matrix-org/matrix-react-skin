@@ -50,6 +50,7 @@ module.exports = React.createClass({
                             <textarea ref="textarea" onKeyDown={this.onKeyDown} />
                         </div>
                         <div className="mx_MessageComposer_upload" onClick={this.onUploadClick}>
+                            <button onClick={this.onUploadClick}>Upload</button>
                             <input type="file" style={uploadInputStyle} ref="uploadInput" onChange={this.onUploadFileSelected} />
                         </div>
                     </div>
