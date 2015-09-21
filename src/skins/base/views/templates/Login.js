@@ -46,6 +46,11 @@ module.exports = React.createClass({
         };
     },
 
+    onServerConfigSubmit: function(ev) {
+        ev.preventDefault();
+        this.onHSChosen();
+    },
+
     componentForStep: function(step) {
         var ServerConfig = sdk.getComponent('molecules.ServerConfig');
 
@@ -53,7 +58,7 @@ module.exports = React.createClass({
             case 'choose_hs':
                 return (
                     <div>
-                        <form onSubmit={this.onHSChosen}>
+                        <form onSubmit={this.onServerConfigSubmit}>
                         <ServerConfig ref="serverConfig" />
                         <input type="submit" value="Continue" />
                         </form>
