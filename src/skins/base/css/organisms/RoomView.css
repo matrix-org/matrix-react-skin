@@ -141,8 +141,8 @@ limitations under the License.
     order: 4;
 
     width: 100%;
-    -webkit-flex: 0 0 58px;
-    flex: 0 0 58px;
+    -webkit-flex: 0 0 40px;
+    flex: 0 0 40px;
 }
 
 .mx_RoomView_statusAreaBox {

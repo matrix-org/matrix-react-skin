@@ -14,8 +14,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+.mx_MemberTile {
+    display: table-row;
+}
+
 .mx_MemberTile_zalgo {
     font-family: Helvetica, Arial, Sans-Serif;
+}
+
+.mx_MemberTile_avatar {
+    display: table-cell;
+    width: 40px;
+}
+
+.mx_MemberTile_name {
+    display: table-cell;
+    vertical-align: middle;
+    overflow: hidden;
 }
 
 .mx_MemberTile_leave {
