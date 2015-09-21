@@ -117,7 +117,7 @@ module.exports = React.createClass({
                     {save_button}
                     <div className="mx_RoomHeader_rightRow">
                         { settings_button }
-                        <button className="mx_RoomHeader_button mx_RoomHeader_search">
+                        <button className="mx_RoomHeader_button mx_RoomHeader_search" style={{display: 'none'}}>
                             Search
                         </button>
                         <button className="mx_RoomHeader_button mx_RoomHeader_video" onClick={this.onVideoClick}>
