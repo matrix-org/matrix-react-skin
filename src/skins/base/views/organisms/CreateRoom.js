@@ -18,9 +18,14 @@ limitations under the License.
 
 var React = require('react');
 
-var CreateRoomController = require('matrix-react-sdk/lib/controllers/organisms/CreateRoom');
+var CreateRoomController = require("matrix-react-sdk/lib/controllers/organisms/CreateRoom");
 
 var sdk = require('matrix-react-sdk');
+
+var PresetValues = require('matrix-react-sdk/lib/controllers/atoms/create_room/Presets').Presets;
+
+var Loader = require("react-loader");
+
 
 module.exports = React.createClass({
     displayName: 'CreateRoom',
@@ -34,20 +39,97 @@ module.exports = React.createClass({
         return this.refs.name_textbox.getName();
     },
 
+    getTopic: function() {
+        return this.refs.topic.getTopic();
+    },
+
+    getAliasLocalpart: function() {
+        return this.refs.alias.getAliasLocalpart();
+    },
+
     getInvitedUsers: function() {
         return this.refs.user_selector.getUserIds();
     },
 
+    onPresetChanged: function(preset) {
+        switch (preset) {
+            case PresetValues.PrivateChat:
+                this.setState({
+                    preset: preset,
+                    is_private: true,
+                    share_history: false,
+                });
+                break;
+            case PresetValues.PublicChat:
+                this.setState({
+                    preset: preset,
+                    is_private: false,
+                    share_history: true,
+                });
+                break;
+            case PresetValues.Custom:
+                this.setState({
+                    preset: preset,
+                });
+                break;
+        }
+    },
+
+    onPrivateChanged: function(ev) {
+        this.setState({
+            preset: PresetValues.Custom,
+            is_private: ev.target.checked,
+        });
+    },
+
+    onShareHistoryChanged: function(ev) {
+        this.setState({
+            preset: PresetValues.Custom,
+            share_history: ev.target.checked,
+        });
+    },
+
+    onTopicChange: function(ev) {
+        this.setState({
+            topic: ev.target.value,
+        });
+    },
+
+    onNameChange: function(ev) {
+        this.setState({
+            room_name: ev.target.value,
+        });
+    },
+
+    onInviteChanged: function(invited_users) {
+        this.setState({
+            invited_users: invited_users,
+        });
+    },
+
+    onAliasChanged: function(alias) {
+        this.setState({
+            alias: alias
+        })
+    },
+
+    onEncryptChanged: function(ev) {
+        this.setState({
+            encrypt: ev.target.checked,
+        });
+    },
+
     render: function() {
-        var CreateRoomButton = sdk.getComponent('atoms.create_room.CreateRoomButton');
-        var RoomNameTextbox = sdk.getComponent('atoms.create_room.RoomNameTextbox');
-        var Presets = sdk.getComponent('atoms.create_room.Presets');
-        var UserSelector = sdk.getComponent('molecules.UserSelector');
+        var CreateRoomButton = sdk.getComponent("atoms.create_room.CreateRoomButton");
+        var RoomAlias = sdk.getComponent("atoms.create_room.RoomAlias");
+        var Presets = sdk.getComponent("atoms.create_room.Presets");
+        var UserSelector = sdk.getComponent("molecules.UserSelector");
+        var RoomHeader = sdk.getComponent("molecules.RoomHeader");
 
         var curr_phase = this.state.phase;
         if (curr_phase == this.phases.CREATING) {
             return (
-                <div>Creating...</div>
+                <Loader/>
             );
         } else {
             var error_box = "";
@@ -60,11 +142,27 @@ module.exports = React.createClass({
             }
             return (
                 <div className="mx_CreateRoom">
-                    <label>Room Name <RoomNameTextbox ref="name_textbox" /></label>
-                    <Presets ref="presets"/>
-                    <UserSelector ref="user_selector"/>
-                    <CreateRoomButton onCreateRoom={this.onCreateRoom} />
-                    {error_box}
+                    <RoomHeader simpleHeader="Create room" />
+                    <div className="mx_CreateRoom_body">
+                        <input type="text" ref="room_name" value={this.state.room_name} onChange={this.onNameChange} placeholder="Name"/> <br />
+                        <textarea className="mx_CreateRoom_description" ref="topic" value={this.state.topic} onChange={this.onTopicChange} placeholder="Topic"/> <br />
+                        <RoomAlias ref="alias" alias={this.state.alias} onChange={this.onAliasChanged}/> <br />
+                        <UserSelector ref="user_selector" selected_users={this.state.invited_users} onChange={this.onInviteChanged}/> <br />
+                        <Presets ref="presets" onChange={this.onPresetChanged} preset={this.state.preset}/> <br />
+                        <div>
+                            <label><input type="checkbox" ref="is_private" checked={this.state.is_private} onChange={this.onPrivateChanged}/> Make this room private</label>
+                        </div>
+                        <div>
+                            <label><input type="checkbox" ref="share_history" checked={this.state.share_history} onChange={this.onShareHistoryChanged}/> Share message history with new users</label>
+                        </div>
+                        <div className="mx_CreateRoom_encrypt">
+                            <label><input type="checkbox" ref="encrypt" checked={this.state.encrypt} onChange={this.onEncryptChanged}/> Encrypt room</label>
+                        </div>
+                        <div>
+                            <CreateRoomButton onCreateRoom={this.onCreateRoom} /> <br />
+                        </div>
+                        {error_box}
+                    </div>
                 </div>
             );
         }
