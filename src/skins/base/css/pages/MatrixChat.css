@@ -29,7 +29,7 @@ limitations under the License.
     position: absolute;
     width: 100%;
     top: 0px;
-    bottom: 8px;
+    bottom: 0px;
 }
 
 .mx_MatrixChat_leftPanel {
