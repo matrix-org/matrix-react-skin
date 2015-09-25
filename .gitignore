@@ -2,3 +2,4 @@ node_modules
 lib
 bundle.css
 bundle.js
+bundle.js.map
