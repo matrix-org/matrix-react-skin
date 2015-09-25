@@ -28,6 +28,7 @@ module.exports = React.createClass({
 
     editAvatar: function() {
         var url = MatrixClientPeg.get().mxcUrlToHttp(this.state.avatarUrl);
+        var ChangeAvatar = sdk.getComponent('molecules.ChangeAvatar');
         Modal.createDialog(ChangeAvatar, {initialAvatarUrl: url});
     },
 
@@ -40,10 +41,12 @@ module.exports = React.createClass({
     },
 
     changePassword: function() {
+        var ChangePassword = sdk.getComponent('molecules.ChangePassword');
         Modal.createDialog(ChangePassword);
     },
 
     onLogoutClicked: function(ev) {
+        var LogoutPrompt = sdk.getComponent('organisms.LogoutPrompt');
         this.logoutModal = Modal.createDialog(LogoutPrompt, {onCancel: this.onLogoutPromptCancel});
     },
 
@@ -54,9 +57,6 @@ module.exports = React.createClass({
     render: function() {
         var EditableText = sdk.getComponent('atoms.EditableText');
         var EnableNotificationsButton = sdk.getComponent('atoms.EnableNotificationsButton');
-        var ChangeAvatar = sdk.getComponent('molecules.ChangeAvatar');
-        var ChangePassword = sdk.getComponent('molecules.ChangePassword');
-        var LogoutPrompt = sdk.getComponent('organisms.LogoutPrompt');
 
         switch (this.state.phase) {
             case this.Phases.Loading:

@@ -18,9 +18,7 @@ limitations under the License.
 
 var React = require('react');
 
-var MatrixClientPeg = require("matrix-react-sdk/lib/MatrixClientPeg");
 var MessageComposerController = require('matrix-react-sdk/lib/controllers/molecules/MessageComposer');
-var ContentMessages = require("matrix-react-sdk/lib/ContentMessages");
 
 module.exports = React.createClass({
     displayName: 'MessageComposer',
@@ -40,7 +38,6 @@ module.exports = React.createClass({
     },
 
     render: function() {
-        var me = this.props.room.getMember(MatrixClientPeg.get().credentials.userId);
         var uploadInputStyle = {display: 'none'};
         return (
             <div className="mx_MessageComposer">
