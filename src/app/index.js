@@ -19,7 +19,7 @@ limitations under the License.
 var React = require('react');
 
 var sdk = require('matrix-react-sdk');
-sdk.loadSkin(require('./skins/base/skindex'));
+sdk.loadSkin(require('../skins/base/skindex'));
 
 // Here, we do some crude URL analysis to allow
 // deep-linking. We only support registration
