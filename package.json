@@ -30,7 +30,8 @@
     "build": "npm run build:css && npm run build:compile && npm run build:bundle",
     "start:js": "webpack -w src/app/index.js bundle.js",
     "start:skins:css": "catw 'src/skins/base/css/**/*.css' -o bundle.css",
-    "start": "parallelshell 'npm run start:js' 'npm run start:skins:css' 'http-server'",
+    "//cache": "Note the -c 1 below due to https://code.google.com/p/chromium/issues/detail?id=508270",
+    "start": "parallelshell 'npm run start:js' 'npm run start:skins:css' 'http-server -c 1'",
     "clean": "rimraf lib bundle.css bundle.js bundle.js.map",
     "prepublish": "npm run build:css && npm run build:compile"
   },
