@@ -24,6 +24,10 @@ fit together:
  * src/skins/custom/views: This contains the view JSX for our skin: it has only
    one file. Note that it shares its name with `molecules.MTextTile` from the base skin. 
    This causes it to take the place of that component in our derived skin.
+   This file provides a `render` method: this is the method that provides react
+   with the HTML nodes to render and is how matrix-react-sdk apps provide all of
+   their markup, so supplying our own version of this method means we can change
+   the HTML that gets rendered for this component.
  * src/app/index.js: The bootstrap javascript for our app. Here, we load our
    custom skin, get the `pages.MatrixChat` component out of the sdk and pass it
    to React to render.
