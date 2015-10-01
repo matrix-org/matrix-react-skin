@@ -18,6 +18,9 @@ fit together:
  * src/skins/custom/: This is the actual directory for the derived skin itself.
  * src/skins/custom/skinfo.json: This declares that this skin's base skin is the
    `base` skin in matrix-react-skin.
+ * src/skins/custom/skindex.json: This lists all the components in our skin. It's
+   generated automatically when we run 'npm reskindex'. We still check it in to
+   our source control though, since it only changes occasionally.
  * src/skins/custom/views: This contains the view JSX for our skin: it has only
    one file. Note that it shares its name with `molecules.MTextTile` from the base skin. 
    This causes it to take the place of that component in our derived skin.
