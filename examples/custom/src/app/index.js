@@ -18,23 +18,15 @@ limitations under the License.
 
 // Remember to make your project depend on react directly as soon as
 // you add a require('react') to any file in your project. Do not rely
-// on react being pulled in via matrix-react-sdk: browserify breaks
-// horribly in this situation and can end up pulling in multiple copies
-// of react.
+// on react being pulled in via matrix-react-sdk
 var React = require("react");
 
-// We pull in the component broker first, separately, as we need to replace
-// components before the SDK loads.
-var ComponentBroker = require("matrix-react-sdk/src/ComponentBroker");
+var sdk = require("matrix-react-sdk");
+sdk.loadSkin(require('../skins/custom/skindex'));
 
-var CustomMTextTile = require('./CustomMTextTile');
-
-ComponentBroker.set('molecules/MTextTile', CustomMTextTile);
-
-var MatrixReactSdk = require("matrix-react-sdk");
-//var MatrixReactSdk = require("../../src/index");
+var MatrixChat = sdk.getComponent('pages.MatrixChat');
 
 React.render(
-    <MatrixReactSdk.MatrixChat />,
+    <MatrixChat />,
     document.getElementById('matrixchat')
 );

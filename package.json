@@ -16,7 +16,6 @@
     "http-server": "^0.8.0",
     "json-loader": "^0.5.3",
     "parallelshell": "^2.0.0",
-    "reactify": "^1.1.1",
     "rimraf": "^2.4.3",
     "source-map-loader": "^0.1.5",
     "uglifycss": "0.0.18",
