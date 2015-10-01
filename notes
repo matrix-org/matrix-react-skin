@@ -1,3 +1,0 @@
-# The sed used to fix up require paths:
-
-find . | grep 'js$' | xargs sed -i '' "s#require(.[\./]*src\(.*\).);#require('matrix-react-sdk/lib\1');#"
