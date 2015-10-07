@@ -96,7 +96,7 @@ limitations under the License.
     height: 100%;
 }
 
-.mx_MatrixChat .mx_RoomView {
+.mx_MatrixChat .mx_MatrixChat_main {
     -webkit-box-ordinal-group: 2;
     -moz-box-ordinal-group: 2;
     -ms-flex-order: 2;

@@ -18,26 +18,15 @@ limitations under the License.
 
 var React = require('react');
 
-var sdk = require('matrix-react-sdk');
-
-var MatrixToolbarController = require('matrix-react-sdk/lib/controllers/molecules/MatrixToolbar');
+var UserSettingsButtonController = require('matrix-react-sdk/lib/controllers/atoms/UserSettingsButton');
 
 module.exports = React.createClass({
-    displayName: 'MatrixToolbar',
-    mixins: [MatrixToolbarController],
+    displayName: 'UserSettingsButton',
+    mixins: [UserSettingsButtonController],
 
     render: function() {
-        var LogoutButton = sdk.getComponent('atoms.LogoutButton');
-        var EnableNotificationsButton = sdk.getComponent('atoms.EnableNotificationsButton');
-        var UserSettingsButton = sdk.getComponent('atoms.UserSettingsButton');
-
         return (
-            <div className="mx_MatrixToolbar">
-                <LogoutButton />
-                <EnableNotificationsButton />
-                <UserSettingsButton />
-            </div>
+            <button className="mx_UserSettingsButton" onClick={this.onClick}>Settings</button>
         );
     }
 });
-

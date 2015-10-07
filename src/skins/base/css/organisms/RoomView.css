@@ -27,6 +27,8 @@ limitations under the License.
 
     flex-direction: column;
     -webkit-flex-direction: column;
+
+    height: 100%;
 }
 
 .mx_RoomView .mx_RoomHeader {

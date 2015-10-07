@@ -55,7 +55,7 @@ module.exports = React.createClass({
     },
 
     render: function() {
-        var EditableText = sdk.getComponent('atoms.EditableText');
+        var ChangeDisplayName = sdk.getComponent('molecules.ChangeDisplayName');
         var EnableNotificationsButton = sdk.getComponent('atoms.EnableNotificationsButton');
 
         switch (this.state.phase) {
@@ -74,7 +74,7 @@ module.exports = React.createClass({
                                 </div>
 
                                 <div className="mx_UserSettings_DisplayName">
-                                    <EditableText ref="displayname" initialValue={this.state.displayName} label="Click to set display name." onValueChanged={this.changeDisplayname}/>
+                                    <ChangeDisplayName ref="displayname" />
                                     <div className="mx_UserSettings_DisplayName_Edit" onClick={this.editDisplayName}>Edit</div>
                                 </div>
 

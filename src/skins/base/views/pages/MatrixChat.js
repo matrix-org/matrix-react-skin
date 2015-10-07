@@ -36,8 +36,33 @@ module.exports = React.createClass({
         var Login = sdk.getComponent('templates.Login');
         var Register = sdk.getComponent('templates.Register');
         var MemberList = sdk.getComponent('organisms.MemberList');
+        var UserSettings = sdk.getComponent('organisms.UserSettings');
+        var CreateRoom = sdk.getComponent('organisms.CreateRoom');
+        //var RoomDirectory = sdk.getComponent('organisms.RoomDirectory');
 
         if (this.state.logged_in && this.state.ready) {
+            var page_element;
+            var right_panel;
+
+            switch (this.state.page_type) {
+                case this.PageTypes.RoomView:
+                    page_element = <RoomView roomId={this.state.currentRoom} key={this.state.currentRoom} />
+                    right_panel = <MemberList roomId={this.state.currentRoom} key={this.state.currentRoom} />
+                    break;
+                case this.PageTypes.UserSettings:
+                    page_element = <UserSettings />
+                    right_panel = null;
+                    break;
+                case this.PageTypes.CreateRoom:
+                    page_element = <CreateRoom onRoomCreated={this.onRoomCreated}/>
+                    right_panel = null;
+                    break;
+                case this.PageTypes.RoomDirectory:
+                    //page_element = <RoomDirectory />
+                    right_panel = null;
+                    break;
+            }
+
             return (
                 <div className="mx_MatrixChat">
                     <div className="mx_MatrixChat_chatWrapper">
@@ -45,9 +70,11 @@ module.exports = React.createClass({
                             <RoomList selectedRoom={this.state.currentRoom} />
                             <MatrixToolbar />
                         </aside>
-                        <RoomView roomId={this.state.currentRoom} key={this.state.currentRoom} />
+                        <main className="mx_MatrixChat_main">
+                            {page_element}
+                        </main>
                         <aside className="mx_MatrixChat_rightPanel">
-                            <MemberList roomId={this.state.currentRoom} key={this.state.currentRoom} />
+                            {right_panel}
                         </aside>
                     </div>
                 </div>
