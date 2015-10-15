@@ -28,6 +28,23 @@ module.exports = React.createClass({
     displayName: 'MessageTile',
     mixins: [MessageTileController],
 
+    onResendClicked: function() {
+        MatrixClientPeg.get().resendEvent(
+            this.props.mxEvent, MatrixClientPeg.get().getRoom(
+                this.props.mxEvent.getRoomId()
+            )
+        ).done(function() {
+            dis.dispatch({
+                action: 'message_sent'
+            });
+        }, function() {
+            dis.dispatch({
+                action: 'message_send_failed'
+            });
+        });
+        dis.dispatch({action: 'message_resend_started'});
+    },
+
     render: function() {
         var MessageTimestamp = sdk.getComponent('atoms.MessageTimestamp');
         var SenderProfile = sdk.getComponent('molecules.SenderProfile');
@@ -78,7 +95,7 @@ module.exports = React.createClass({
             sender = <SenderProfile mxEvent={this.props.mxEvent} aux={aux} />;
         }
         if (this.props.mxEvent.status === "not_sent" && !this.state.resending) {
-            resend = <button className="mx_MessageTile_msgOption" onClick={this.onResend}>
+            resend = <button className="mx_MessageTile_msgOption" onClick={this.onResendClicked}>
                 Resend
             </button>;
         }
