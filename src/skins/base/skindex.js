@@ -38,6 +38,7 @@ skin['molecules.ChangeAvatar'] = require('./views/molecules/ChangeAvatar');
 skin['molecules.ChangeDisplayName'] = require('./views/molecules/ChangeDisplayName');
 skin['molecules.ChangePassword'] = require('./views/molecules/ChangePassword');
 skin['molecules.EventAsTextTile'] = require('./views/molecules/EventAsTextTile');
+skin['molecules.EventTile'] = require('./views/molecules/EventTile');
 skin['molecules.MatrixToolbar'] = require('./views/molecules/MatrixToolbar');
 skin['molecules.MemberInfo'] = require('./views/molecules/MemberInfo');
 skin['molecules.MemberTile'] = require('./views/molecules/MemberTile');
