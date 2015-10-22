@@ -18,6 +18,7 @@ limitations under the License.
 
 var React = require('react');
 var classNames = require('classnames');
+var sdk = require('matrix-react-sdk');
 
 var RoomTileController = require('matrix-react-sdk/lib/controllers/molecules/RoomTile');
 
@@ -27,6 +28,8 @@ module.exports = React.createClass({
     displayName: 'RoomTile',
     mixins: [RoomTileController],
     render: function() {
+        var RoomAvatar = sdk.getComponent('atoms.RoomAvatar');
+
         var myUserId = MatrixClientPeg.get().credentials.userId;
         var classes = classNames({
             'mx_RoomTile': true,
@@ -37,7 +40,7 @@ module.exports = React.createClass({
         });
         return (
             <div className={classes} onClick={this.onClick}>
-                <div className="mx_RoomTile_name">{this.props.room.name}</div>
+                <RoomAvatar room={this.props.room} /><div className="mx_RoomTile_name">{this.props.room.name}</div>
             </div>
         );
     }

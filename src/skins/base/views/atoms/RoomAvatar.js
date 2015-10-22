@@ -24,6 +24,14 @@ module.exports = React.createClass({
     displayName: 'RoomAvatar',
     mixins: [RoomAvatarController],
 
+    getUrlList: function() {
+        return [
+            this.roomAvatarUrl(),
+            this.getOneToOneAvatar(),
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADRJREFUeNrszQENADAIACB9QjNbxSKP4eagAFnTseHFErFYLBaLxWKxWCwWi8Vi8cX4CzAABSwCRWJw31gAAAAASUVORK5CYII="
+        ];
+    },
+
     render: function() {
         return (
             <img className="mx_RoomAvatar" src={this.state.imageUrl} onError={this.onError}
