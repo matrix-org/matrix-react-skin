@@ -124,7 +124,7 @@ module.exports = React.createClass({
             var can_change_levels = false;
         }
 
-        var banned = this.props.room.getMembersWithMemership("ban");
+        var banned = this.props.room.getMembersWithMembership("ban");
 
         return (
             <div className="mx_RoomSettings">
